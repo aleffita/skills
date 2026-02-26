@@ -1,0 +1,76 @@
+{
+  "skill_name": "media-producer",
+  "description": "Evals for testing the media-producer skill workflow",
+  "evals": [
+    {
+      "id": 1,
+      "name": "simple-text-to-video",
+      "prompt": "Gere um vídeo de 5 segundos de um gato brincando com uma bola vermelha",
+      "expected": "Vídeo .mp4 gerado com sucesso usando CogVideoX-3 ou ViduQ1-text",
+      "workflow": [
+        "Executar generate_video.py com prompt",
+        "Aguardar geração",
+        "Verificar arquivo .mp4 criado"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "image-generation",
+      "prompt": "Gere uma imagem de um pôr do sol sobre o oceano",
+      "expected": "Imagem .png gerada com sucesso usando CogView-4",
+      "workflow": [
+        "Executar generate_image.py com prompt",
+        "Verificar arquivo .png criado"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "image-to-video-pipeline",
+      "prompt": "Gere uma imagem de uma montanha com neve e depois anime ela com nuvens se movendo",
+      "expected": "Pipeline completo: 1. Gerar imagem 2. Animar com image-to-video",
+      "workflow": [
+        "Executar generate_image.py",
+        "Obter URL/path da imagem",
+        "Executar generate_video.py com --image-url",
+        "Verificar vídeo gerado"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "frame-transition-pipeline",
+      "prompt": "Gere duas imagens: uma paisagem de dia e a mesma paisagem à noite. Depois crie um vídeo mostrando a transição entre elas.",
+      "expected": "Pipeline: 1. Gerar 2 imagens 2. Frame transition com ViduQ1-Start-End",
+      "workflow": [
+        "Executar generate_image.py para imagem 1 (dia)",
+        "Executar generate_image.py para imagem 2 (noite)",
+        "Executar generate_video.py com ambas as URLs",
+        "Verificar vídeo de transição"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "project-management",
+      "prompt": "Crie um projeto chamado 'Teste' com visão 'Um vídeo de teste' e adicione 2 cenas",
+      "expected": "Projeto criado com SQLite, 2 cenas registradas",
+      "workflow": [
+        "Executar project.py init",
+        "Verificar banco criado",
+        "Executar project.py add-scene (2x)",
+        "Verificar scenes no banco"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "full-production-workflow",
+      "prompt": "Crie um mini documentário de 15 segundos sobre borboletas com 3 cenas: 1) Borboleta em flor, 2) Voando, 3) Pousando",
+      "expected": "Produção completa: projeto criado, 3 cenas, vídeos gerados, composição final",
+      "workflow": [
+        "Criar projeto com project.py init",
+        "Adicionar 3 cenas com project.py add-scene",
+        "Gerar 3 vídeos com generate_video.py",
+        "Compor final com compose.py",
+        "Verificar vídeo final"
+      ]
+    }
+  ]
+}

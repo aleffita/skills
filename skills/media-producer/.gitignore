@@ -1,0 +1,60 @@
+# Media Producer Skill - Git Ignore
+# Ignore generated content and test projects
+
+# Test projects (created during development/testing)
+test_project*/
+test*/
+*_test/
+references/*
+!references/.gitkeep
+
+# Generated media files
+*.mp4
+*.webm
+*.mov
+*.avi
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+
+# Project databases (user-specific)
+*.db
+*.sqlite
+*.sqlite3
+
+# Output directories
+output/
+assets/
+frames/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+
+# UV
+.uv/
+uv.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
