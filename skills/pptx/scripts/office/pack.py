@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "defusedxml",
+# ]
+# ///
+
 """Pack a directory into a DOCX, PPTX, or XLSX file.
 
 Validates with auto-repair, condenses XML formatting, and creates the Office file.
@@ -18,6 +26,8 @@ import zipfile
 from pathlib import Path
 
 import defusedxml.minidom
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from validators import DOCXSchemaValidator, PPTXSchemaValidator, RedliningValidator
 

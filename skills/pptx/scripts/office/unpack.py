@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "defusedxml",
+# ]
+# ///
+
 """Unpack Office files (DOCX, PPTX, XLSX) for editing.
 
 Extracts the ZIP archive, pretty-prints XML files, and optionally:
@@ -19,6 +27,8 @@ import zipfile
 from pathlib import Path
 
 import defusedxml.minidom
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from helpers.merge_runs import merge_runs as do_merge_runs
 from helpers.simplify_redlines import simplify_redlines as do_simplify_redlines
