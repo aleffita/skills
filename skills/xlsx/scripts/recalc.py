@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "openpyxl",
+# ]
+# ///
+
 """
 Excel Formula Recalculation Script
 Recalculates all formulas in an Excel file using LibreOffice
@@ -10,9 +18,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-from office.soffice import get_soffice_env
-
 from openpyxl import load_workbook
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "office"))
+
+from office.soffice import get_soffice_env
 
 MACRO_DIR_MACOS = "~/Library/Application Support/LibreOffice/4/user/basic/Standard"
 MACRO_DIR_LINUX = "~/.config/libreoffice/4/user/basic/Standard"

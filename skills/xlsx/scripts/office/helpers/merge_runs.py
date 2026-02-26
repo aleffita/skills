@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "defusedxml",
+# ]
+# ///
+
 """Merge adjacent runs with identical formatting in DOCX.
 
 Merges adjacent <w:r> elements that have identical <w:rPr> properties.
