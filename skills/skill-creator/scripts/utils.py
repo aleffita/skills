@@ -1,3 +1,9 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 """Shared utilities for skill-creator scripts."""
 
 from pathlib import Path

@@ -1,4 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 """Run trigger evaluation for a skill description.
 
 Tests whether a skill's description causes Claude to trigger (read the skill)
@@ -10,11 +19,9 @@ import json
 import os
 import select
 import subprocess
-import sys
 import time
 import uuid
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from pathlib import Path
 
 from scripts.utils import parse_skill_md
 

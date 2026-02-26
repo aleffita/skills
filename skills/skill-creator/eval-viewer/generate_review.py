@@ -1,4 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 """Generate and serve a review page for eval results.
 
 Reads the workspace directory, discovers runs (directories with outputs/),
@@ -6,8 +11,8 @@ embeds all output data into a self-contained HTML page, and serves it via
 a tiny HTTP server. Feedback auto-saves to feedback.json in the workspace.
 
 Usage:
-    python generate_review.py <workspace-path> [--port PORT] [--skill-name NAME]
-    python generate_review.py <workspace-path> --previous-feedback /path/to/old/feedback.json
+    uv run generate_review.py <workspace-path> [--port PORT] [--skill-name NAME]
+    uv run generate_review.py <workspace-path> --previous-feedback /path/to/old/feedback.json
 
 No dependencies beyond the Python stdlib are required.
 """

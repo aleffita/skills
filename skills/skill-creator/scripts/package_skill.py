@@ -1,19 +1,28 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "pyyaml",
+# ]
+# ///
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 """
 Skill Packager - Creates a distributable .skill file of a skill folder
 
 Usage:
-    python utils/package_skill.py <path/to/skill-folder> [output-directory]
+    uv run package_skill.py <path/to/skill-folder> [output-directory]
 
 Example:
-    python utils/package_skill.py skills/public/my-skill
-    python utils/package_skill.py skills/public/my-skill ./dist
+    uv run package_skill.py skills/public/my-skill
+    uv run package_skill.py skills/public/my-skill ./dist
 """
 
 import fnmatch
-import sys
 import zipfile
-from pathlib import Path
 from scripts.quick_validate import validate_skill
 
 # Patterns to exclude when packaging skills.
@@ -110,10 +119,10 @@ def package_skill(skill_path, output_dir=None):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python utils/package_skill.py <path/to/skill-folder> [output-directory]")
+        print("Usage: uv run scripts/package_skill.py <path/to/skill-folder> [output-directory]")
         print("\nExample:")
-        print("  python utils/package_skill.py skills/public/my-skill")
-        print("  python utils/package_skill.py skills/public/my-skill ./dist")
+        print("  uv run scripts/package_skill.py skills/public/my-skill")
+        print("  uv run scripts/package_skill.py skills/public/my-skill ./dist")
         sys.exit(1)
 
     skill_path = sys.argv[1]

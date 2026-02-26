@@ -1,4 +1,15 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "anthropic",
+# ]
+# ///
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 """Run the eval + improve loop until all pass or max iterations reached.
 
 Combines run_eval.py and improve_description.py in a loop, tracking history
@@ -9,11 +20,9 @@ overfitting.
 import argparse
 import json
 import random
-import sys
 import tempfile
 import time
 import webbrowser
-from pathlib import Path
 
 import anthropic
 
