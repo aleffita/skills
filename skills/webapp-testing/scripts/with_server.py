@@ -1,14 +1,19 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 """
 Start one or more servers, wait for them to be ready, run a command, then clean up.
 
 Usage:
     # Single server
-    python scripts/with_server.py --server "npm run dev" --port 5173 -- python automation.py
-    python scripts/with_server.py --server "npm start" --port 3000 -- python test.py
+    uv run scripts/with_server.py --server "npm run dev" --port 5173 -- python automation.py
+    uv run scripts/with_server.py --server "npm start" --port 3000 -- python test.py
 
     # Multiple servers
-    python scripts/with_server.py \
+    uv run scripts/with_server.py \
       --server "cd backend && python server.py" --port 3000 \
       --server "cd frontend && npm run dev" --port 5173 \
       -- python test.py

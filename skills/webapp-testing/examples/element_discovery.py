@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "playwright",
+# ]
+# ///
+
 from playwright.sync_api import sync_playwright
 
 # Example: Discovering buttons and other elements on a page
