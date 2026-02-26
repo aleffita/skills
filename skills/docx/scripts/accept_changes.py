@@ -1,3 +1,9 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 """Accept all tracked changes in a DOCX file using LibreOffice.
 
 Requires LibreOffice (soffice) to be installed.
@@ -7,7 +13,10 @@ import argparse
 import logging
 import shutil
 import subprocess
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "office"))
 
 from office.soffice import get_soffice_env
 

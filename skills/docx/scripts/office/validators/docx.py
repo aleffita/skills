@@ -1,3 +1,12 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "defusedxml",
+#     "lxml",
+# ]
+# ///
+
 """
 Validator for Word document XML files against XSD schemas.
 """
