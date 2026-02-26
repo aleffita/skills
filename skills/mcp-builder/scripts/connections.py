@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "mcp",
+# ]
+# ///
+
 """Lightweight connection handling for MCP servers."""
 
 from abc import ABC, abstractmethod

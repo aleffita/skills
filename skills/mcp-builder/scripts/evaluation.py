@@ -1,3 +1,12 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "anthropic",
+#     "mcp",
+# ]
+# ///
+
 """MCP Server Evaluation Harness
 
 This script evaluates MCP servers by running test questions against them using Claude.
@@ -15,6 +24,8 @@ from pathlib import Path
 from typing import Any
 
 from anthropic import Anthropic
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from connections import create_connection
 
