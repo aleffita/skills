@@ -233,11 +233,92 @@ Use como base para estruturar projetos complexos.
 
 | Script | Função |
 |--------|--------|
-| `project.py` | Gerenciar projetos (init, status, scenes, assets) |
-| `generate_image.py` | Gerar imagens com CogView-4 |
+| `project.py` | Gerenciar projetos, scenes, assets, tracks |
+| `generate_image.py` | Gerar imagens com CogView-4 (+ fallback) |
 | `generate_video.py` | Gerar vídeos com CogVideoX-3 / Vidu |
 | `retrieve_result.py` | Buscar resultado de task assíncrona |
-| `compose.py` | Compor vídeos com FFmpeg |
+| `compose.py` | Compor vídeos com FFmpeg (+ multi-track) |
+
+---
+
+## Gestão de Assets
+
+### Scan de Assets
+Detecta arquivos não registrados na pasta assets/:
+```bash
+uv run scripts/project.py scan-assets --project ./my_project/
+```
+
+### Registrar Asset
+Registra um asset e opcionalmente cria uma track:
+```bash
+uv run scripts/project.py register-asset --project ./my_project/ \
+  --file assets/audio.wav --type audio --use-case soundtrack --create-track
+```
+
+**Use Cases:**
+- `soundtrack`: Música de fundo (volume 0.5)
+- `voiceover`: Narração (volume 1.0)
+- `sfx`: Efeito sonoro (momento específico)
+- `overlay`: Imagem sobreposta
+- `background`: Imagem de fundo
+
+---
+
+## Tracks e Composição Multi-Camada
+
+### Conceito
+Tracks são camadas de mídia que são compostas sobre o vídeo base:
+- Layer 0: Vídeo base (cenas concatenadas)
+- Layer 1+: Overlays, áudio adicional, legendas
+
+### Comandos de Track
+```bash
+# Listar tracks
+uv run scripts/project.py list-tracks --project ./my_project/
+
+# Adicionar track manualmente
+uv run scripts/project.py add-track --project ./my_project/ \
+  --name "Soundtrack" --type audio --volume 0.5
+
+# Remover track
+uv run scripts/project.py remove-track --project ./my_project/ --track-id xxx
+```
+
+### Composição com Tracks
+```bash
+# Compor usando todas as tracks do projeto
+uv run scripts/compose.py --project ./my_project/ --output final.mp4 --with-tracks
+```
+
+### Adicionar Áudio Manualmente
+```bash
+uv run scripts/compose.py --project ./my_project/ --output final.mp4 \
+  --add-audio assets/music.wav --audio-volume 0.5 --audio-mode mix
+```
+
+### Adicionar Overlay de Imagem
+```bash
+uv run scripts/compose.py --project ./my_project/ --output final.mp4 \
+  --add-image assets/logo.png --image-position top-right --image-opacity 0.8
+```
+
+### Adicionar Legendas
+```bash
+uv run scripts/compose.py --project ./my_project/ --output final.mp4 \
+  --add-subtitles assets/subtitles.srt --subtitle-style bold
+```
+
+---
+
+## Fallback de Imagens
+
+Se a API falhar ou para testes rápidos:
+```bash
+uv run scripts/generate_image.py --prompt "test" --output image.png --fallback
+```
+
+O script usa `test_sdk.png` como fallback automaticamente quando a API falha.
 
 ---
 
